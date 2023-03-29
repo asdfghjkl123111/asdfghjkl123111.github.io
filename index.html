@@ -1,12 +1,12 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
         <meta charset="UTF-8" />
-        <title>Hexo</title>
-        <meta name="author" content="John Doe" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
+        <title>CSDN博客</title>
+        <meta name="author" content="锅锅复锅锅" />
+        <meta name="description" content="hexoDemo用于介绍如何使用hexo" />
+        <meta name="keywords" content="hexo,node,博客" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
         <link rel="icon" href="/images/avatar.jpg" />
         <script src="https://cdn.staticfile.org/vue/3.2.47/vue.global.prod.min.js"></script>
@@ -53,7 +53,7 @@
                 <nav id="menu" ref="menu">
     <div class="desktop-menu">
         <a class="title" href="/">
-            <span>HEXO</span>
+            <span>CSDN博客</span>
         </a>
         
         <a href="/">
@@ -86,7 +86,7 @@
         <div class="curtain" v-show="showMenu" @click="showMenu = !showMenu"></div>
         <div class="title" @click="showMenu = !showMenu">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;HEXO</span>
+            <span>&emsp;CSDN博客</span>
         </div>
         <transition name="slide">
         <div class="items" v-show="showMenu">
@@ -151,9 +151,9 @@
         <span class="loop"></span>
         <span class="info">
             <div class="wrap">
-                <h1>Hexo</h1>
-                <h3></h3>
-                <h5></h5>
+                <h1>CSDN博客</h1>
+                <h3>这是一个demo页</h3>
+                <h5>hexoDemo用于介绍如何使用hexo</h5>
             </div>
         </span>
     </div>
@@ -212,19 +212,6 @@
         <div class="content" v-pre>
             
             <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
             
         </div>
     </div>
@@ -254,36 +241,22 @@
         <div class="content" v-pre>
             
             <p> <img src="https://static.vue-js.com/8d0e9ca0-8f9b-11eb-ab90-d9ae814b240d.png" alt="https://static.vue-js.com/8d0e9ca0-8f9b-11eb-ab90-d9ae814b240d.png"> </p>
-<p>​	当对一个文档进行布局的时候，浏览器的渲染引擎会根据标准之一的css模型将所有的元素表示为一个矩形的盒子。</p>
-<p>一个盒子由&#96;&#96;&#96;&#96;padding<code>，</code>border<code>，</code>margin<code>，</code>content&#96;&#96;&#96;组成</p>
-<p>border：边框，围绕元素内容的内边距的一条或者是多条线，由粗细，样式，颜色三部分组成。</p>
-<p>padding：内边距，清除内容周围的区域，内边距是透明的，取值是不能为负，能被盒子的background影响。</p>
-<p>margin：外边距，在元素外创建额外的空白，但是空白通常指不能放其他元素的区域。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<p>我们在查看浏览器元素的时候就会发现，元素的大小已经变成了240.</p>
-<p><strong>这是因为在css中盒子模型可以分为，w3c标准盒子模型，ie怪异盒子模型。</strong></p>
-<h4 id="w3c标准盒子模型"><a href="#w3c标准盒子模型" class="headerlink" title="w3c标准盒子模型"></a>w3c标准盒子模型</h4><p> <img src="https://static.vue-js.com/c0e1d2e0-8f9b-11eb-85f6-6fac77c0c9b3.png" alt="https://static.vue-js.com/c0e1d2e0-8f9b-11eb-85f6-6fac77c0c9b3.png"> </p>
-<p>由此，盒子的宽度  &#x3D; width+padding+border+margin</p>
-<p>​			盒子的高度 &#x3D; height + padding + border+margin</p>
-<p>也就是width&#x2F;height 只是内容的高度不包含padding和border值</p>
-<p>因此上边盒子的实际宽高就变成了240</p>
-<h4 id="ie怪异盒子模型"><a href="#ie怪异盒子模型" class="headerlink" title="ie怪异盒子模型"></a>ie怪异盒子模型</h4><p> <img src="https://static.vue-js.com/cfbb3ef0-8f9b-11eb-ab90-d9ae814b240d.png" alt="https://static.vue-js.com/cfbb3ef0-8f9b-11eb-ab90-d9ae814b240d.png"><br>盒子的宽度  &#x3D; width + margin</p>
-<p>盒子的高度  &#x3D; height+margin</p>
-<p>也就是width&#x2F;height 包含了padding和border</p>
-<p>css中的box-sizing 属性定义了引擎如何计算一个元素的总宽度和总高度。</p>
-<h5 id="box-sizing-content-box-border-box-inherit"><a href="#box-sizing-content-box-border-box-inherit" class="headerlink" title="box-sizing :  content-box  |   border-box    |  inherit ;"></a>box-sizing :  content-box  |   border-box    |  inherit ;</h5><p>content-box是默认值，元素的width&#x2F;height 不包含padding、border，与标准盒子表现一致。</p>
-<p>border-box元素的width&#x2F;height包含padding、border，和怪异盒子保持一致。</p>
-<p>inherit指定了box-sizing属性的值，应该从父元素继承。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;<span class="selector-tag">div</span> class=\&quot;box\&quot;&gt;<span class="number">90</span></span><br><span class="line">盒子模型</span><br><span class="line">&lt;/<span class="selector-tag">div</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<p>这个时候，在回到浏览器查看盒子的宽度就是200px</p>
-
             
         </div>
     </div>
     <div class="post-tags">
         
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/html/" style="color: #ffa2c4">
+                html
+            </a>
+        </span>
         
     </div>
     <a href="/2019/03/28/%E4%BD%BF%E7%94%A8svg%E7%BB%98%E5%88%B6%E7%9F%A9%E5%BD%A2/" class="go-post">阅读全文</a>
@@ -313,9 +286,9 @@
         <div class="avatar">
             <img src="/images/avatar.jpg" alt="avatar" />
         </div>
-        <div class="name">John Doe</div>
+        <div class="name">锅锅复锅锅</div>
         <div class="description">
-            <p>Description<br>…</p>
+            <p>Normal <em>Italic</em> <strong>Strong</strong></p>
 
         </div>
         
@@ -339,11 +312,11 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2022 - 2023 Hexo
+            2022 - 2023 CSDN博客
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
-            &commat;John Doe
+            &commat;锅锅复锅锅
         </div>
         <div>
             Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
