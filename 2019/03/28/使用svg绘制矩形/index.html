@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Archives | Hexo</title>
+        <title>说说你对盒子模型的理解？ | Hexo</title>
         <meta name="author" content="John Doe" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
@@ -27,6 +27,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -139,54 +143,56 @@
     </div>
 </nav>
 
-                
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+                <div class="article">
+    <div>
+        <h1>说说你对盒子模型的理解？</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2019/3/28
+        </span>
         
-        <div class="timeline" data-title="说说你对盒子模型的理解？">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2019/3/28</div>
-                <a href="/2019/03/28/%E4%BD%BF%E7%94%A8svg%E7%BB%98%E5%88%B6%E7%9F%A9%E5%BD%A2/">
-                    <h3>说说你对盒子模型的理解？</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/3/29</div>
-                <a href="/2023/03/29/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="b">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2023/3/29</div>
-                <a href="/2023/03/29/b/">
-                    <h3>b</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <p> <img src="https://static.vue-js.com/8d0e9ca0-8f9b-11eb-ab90-d9ae814b240d.png" alt="https://static.vue-js.com/8d0e9ca0-8f9b-11eb-ab90-d9ae814b240d.png"> </p>
+<p>​	当对一个文档进行布局的时候，浏览器的渲染引擎会根据标准之一的css模型将所有的元素表示为一个矩形的盒子。</p>
+<p>一个盒子由&#96;&#96;&#96;&#96;padding<code>，</code>border<code>，</code>margin<code>，</code>content&#96;&#96;&#96;组成</p>
+<p>border：边框，围绕元素内容的内边距的一条或者是多条线，由粗细，样式，颜色三部分组成。</p>
+<p>padding：内边距，清除内容周围的区域，内边距是透明的，取值是不能为负，能被盒子的background影响。</p>
+<p>margin：外边距，在元素外创建额外的空白，但是空白通常指不能放其他元素的区域。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我们在查看浏览器元素的时候就会发现，元素的大小已经变成了240.</p>
+<p><strong>这是因为在css中盒子模型可以分为，w3c标准盒子模型，ie怪异盒子模型。</strong></p>
+<h4 id="w3c标准盒子模型"><a href="#w3c标准盒子模型" class="headerlink" title="w3c标准盒子模型"></a>w3c标准盒子模型</h4><p> <img src="https://static.vue-js.com/c0e1d2e0-8f9b-11eb-85f6-6fac77c0c9b3.png" alt="https://static.vue-js.com/c0e1d2e0-8f9b-11eb-85f6-6fac77c0c9b3.png"> </p>
+<p>由此，盒子的宽度  &#x3D; width+padding+border+margin</p>
+<p>​			盒子的高度 &#x3D; height + padding + border+margin</p>
+<p>也就是width&#x2F;height 只是内容的高度不包含padding和border值</p>
+<p>因此上边盒子的实际宽高就变成了240</p>
+<h4 id="ie怪异盒子模型"><a href="#ie怪异盒子模型" class="headerlink" title="ie怪异盒子模型"></a>ie怪异盒子模型</h4><p> <img src="https://static.vue-js.com/cfbb3ef0-8f9b-11eb-ab90-d9ae814b240d.png" alt="https://static.vue-js.com/cfbb3ef0-8f9b-11eb-ab90-d9ae814b240d.png"><br>盒子的宽度  &#x3D; width + margin</p>
+<p>盒子的高度  &#x3D; height+margin</p>
+<p>也就是width&#x2F;height 包含了padding和border</p>
+<p>css中的box-sizing 属性定义了引擎如何计算一个元素的总宽度和总高度。</p>
+<h5 id="box-sizing-content-box-border-box-inherit"><a href="#box-sizing-content-box-border-box-inherit" class="headerlink" title="box-sizing :  content-box  |   border-box    |  inherit ;"></a>box-sizing :  content-box  |   border-box    |  inherit ;</h5><p>content-box是默认值，元素的width&#x2F;height 不包含padding、border，与标准盒子表现一致。</p>
+<p>border-box元素的width&#x2F;height包含padding、border，和怪异盒子保持一致。</p>
+<p>inherit指定了box-sizing属性的值，应该从父元素继承。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;<span class="selector-tag">div</span> class=\&quot;box\&quot;&gt;<span class="number">90</span></span><br><span class="line">盒子模型</span><br><span class="line">&lt;/<span class="selector-tag">div</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候，在回到浏览器查看盒子的宽度就是200px</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
                 <footer id="footer">
@@ -218,6 +224,12 @@
             
         </div>
         <script src="/js/main.js"></script>
+        
+        
+
+
+
+
         
     </body>
 </html>
