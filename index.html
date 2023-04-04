@@ -142,7 +142,7 @@
 </nav>
 
                 <div id="home-head">
-    <div id="home-background" ref="homeBackground" data-image="/images/background.jpg"></div>
+    <div id="home-background" ref="homeBackground" data-image="/images/432021e900cb9119a6b9d7d88f5c1eec.jpeg"></div>
     
     <div id="home-info" @click="homeClick">
         <span class="loop"></span>
@@ -240,20 +240,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h1 id="如何在express的路由中操作socket-io"><a href="#如何在express的路由中操作socket-io" class="headerlink" title="如何在express的路由中操作socket.io"></a>如何在express的路由中操作socket.io</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​	最近，遇到一个问题需要在<code>express</code>路由中操作<code>socket</code>，而网上的例子基本上是在主文件操作<code>socket</code>。</p>
-<h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>​	给<code>router</code>添加一个<code>io</code>函数，接收参数<code>io</code> (<code>io</code>是引入的<code>socket.io</code>库)。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/chat.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">IO</span> = <span class="literal">null</span>;</span><br><span class="line">router.<span class="property">io</span> = <span class="keyword">function</span>(<span class="params">io</span>) &#123;</span><br><span class="line">    io.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">        socket.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 操作data</span></span><br><span class="line">        &#125;)  </span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="variable constant_">IO</span> = io;</span><br><span class="line">    <span class="keyword">return</span> io;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/xxx&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 下面通过IO操作socket，具体socket操作请自行查看文档</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 以下是例子</span></span><br><span class="line">    <span class="variable constant_">IO</span>.<span class="property">sockets</span>.<span class="title function_">in</span>(<span class="title class_">Id</span>).<span class="title function_">emit</span>(<span class="string">&#x27;xxx&#x27;</span>, &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>咱把<code>router</code>导出，在<code>app.js</code>中导入，然后把<code>router.io</code>赋给<code>app.io</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> chatRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/chat&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line">app.<span class="property">io</span> = chatRouter.<span class="property">io</span>; <span class="comment">// 现在app.io是一个函数，可以接收socket.io</span></span><br><span class="line">...</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/chat&#x27;</span>, chatRouter);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = app; </span><br></pre></td></tr></table></figure>
-
-<p>最后，在<code>bin/www</code>中导入<code>socket.io</code>并调用<code>app.io</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bin/www</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">&#x27;../app&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">...</span><br><span class="line"><span class="keyword">var</span> server = http.<span class="title function_">createServer</span>(app);</span><br><span class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">&#x27;socket.io&#x27;</span>)(server);</span><br><span class="line">app.<span class="title function_">io</span>(io);</span><br></pre></td></tr></table></figure>
-
-<p>现在<code>chat.js</code>中的<code>router.io</code>成功接收到导入的<code>socket</code>。</p>
-
+            <h1 id="如何在express的路由中操作socket-io"><a href="#如何在express的路由中操作socket-io" class="headerlink" title="如何在express的路由中操作socket.io"></a>如何在express的路由中操作socket.io</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​	最近，遇到一个问题需要在<code>express</code>路由中操作<code>socket</code> 而网上的例子基本上是在主文件操作<code>socket</code>。</p>
             
         </div>
     </div>
@@ -306,7 +293,7 @@
         
         <span class="tag">
             
-            <a href="/tags/html/" style="color: #00bcd4">
+            <a href="/tags/html/" style="color: #03a9f4">
                 html
             </a>
         </span>
@@ -374,6 +361,13 @@
         <div>
             Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
             <a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+        <div>
+            备案号：
+            
+            
+            
         </div>
         
     </div>
