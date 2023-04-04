@@ -17,13 +17,6 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 
-<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
-
 
 
 <script src="/js/lib/preview.js"></script>
@@ -172,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/html/" style="color: #03a9f4">html</a>
+                <a href="/tags/html/" style="color: #ff7d73">html</a>
             </span>
             
         </span>
@@ -187,7 +180,13 @@
 <p>border：边框，围绕元素内容的内边距的一条或者是多条线，由粗细，样式，颜色三部分组成。</p>
 <p>padding：内边距，清除内容周围的区域，内边距是透明的，取值是不能为负，能被盒子的background影响。</p>
 <p>margin：外边距，在元素外创建额外的空白，但是空白通常指不能放其他元素的区域。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">	<span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style>
+.box</span> <span class="token punctuation">&#123;</span>
+	<span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+	<span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+&lt;/style><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们在查看浏览器元素的时候就会发现，元素的大小已经变成了240.</p>
 <p><strong>这是因为在css中盒子模型可以分为，w3c标准盒子模型，ie怪异盒子模型。</strong></p>
@@ -203,7 +202,17 @@
 <h5 id="box-sizing-content-box-border-box-inherit"><a href="#box-sizing-content-box-border-box-inherit" class="headerlink" title="box-sizing :  content-box  |   border-box    |  inherit ;"></a>box-sizing :  content-box  |   border-box    |  inherit ;</h5><p>content-box是默认值，元素的width&#x2F;height 不包含padding、border，与标准盒子表现一致。</p>
 <p>border-box元素的width&#x2F;height包含padding、border，和怪异盒子保持一致。</p>
 <p>inherit指定了box-sizing属性的值，应该从父元素继承。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;<span class="selector-tag">div</span> class=\&quot;box\&quot;&gt;<span class="number">90</span></span><br><span class="line">盒子模型</span><br><span class="line">&lt;/<span class="selector-tag">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style>
+.box</span> <span class="token punctuation">&#123;</span>
+	<span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+    <span class="token property">box-sizing</span><span class="token punctuation">:</span> border-box<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+&lt;/style>
+&lt;div class=\"box\">90
+盒子模型
+&lt;/div><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这个时候，在回到浏览器查看盒子的宽度就是200px</p>
 

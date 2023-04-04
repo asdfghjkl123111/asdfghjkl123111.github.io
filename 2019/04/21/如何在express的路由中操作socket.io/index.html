@@ -17,13 +17,6 @@
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 
-<script src="https://cdn.staticfile.org/highlight.js/11.7.0/highlight.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://cdn.staticfile.org/highlight.js/11.7.0/styles/github.min.css"
-/>
-<script src="/js/lib/highlight.js"></script>
-
 
 
 <script src="/js/lib/preview.js"></script>
@@ -172,7 +165,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/express/" style="color: #00bcd4">express</a>
+                <a href="/tags/express/" style="color: #ffa2c4">express</a>
             </span>
             
         </span>
@@ -183,15 +176,55 @@
         <h1 id="如何在express的路由中操作socket-io"><a href="#如何在express的路由中操作socket-io" class="headerlink" title="如何在express的路由中操作socket.io"></a>如何在express的路由中操作socket.io</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>​	最近，遇到一个问题需要在<code>express</code>路由中操作<code>socket</code> 而网上的例子基本上是在主文件操作<code>socket</code>。</p>
 <span id="more"></span>
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>​	给<code>router</code>添加一个<code>io</code>函数，接收参数<code>io</code> (<code>io</code>是引入的<code>socket.io</code>库)。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/chat.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> router = express.<span class="title class_">Router</span>()</span><br><span class="line"><span class="keyword">var</span> <span class="variable constant_">IO</span> = <span class="literal">null</span>;</span><br><span class="line">router.<span class="property">io</span> = <span class="keyword">function</span>(<span class="params">io</span>) &#123;</span><br><span class="line">    io.<span class="title function_">on</span>(<span class="string">&#x27;connection&#x27;</span>, <span class="function">(<span class="params">socket</span>) =&gt;</span> &#123;</span><br><span class="line">        socket.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 操作data</span></span><br><span class="line">        &#125;)  </span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="variable constant_">IO</span> = io;</span><br><span class="line">    <span class="keyword">return</span> io;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&#x27;/xxx&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 下面通过IO操作socket，具体socket操作请自行查看文档</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 以下是例子</span></span><br><span class="line">    <span class="variable constant_">IO</span>.<span class="property">sockets</span>.<span class="title function_">in</span>(<span class="title class_">Id</span>).<span class="title function_">emit</span>(<span class="string">&#x27;xxx&#x27;</span>, &#123; </span><br><span class="line">        ...</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = router;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// routes/chat.js</span>
+<span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> router <span class="token operator">=</span> express<span class="token punctuation">.</span><span class="token function">Router</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> <span class="token constant">IO</span> <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+router<span class="token punctuation">.</span><span class="token function-variable function">io</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">io</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">socket</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 操作data</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>  
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token constant">IO</span> <span class="token operator">=</span> io<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> io<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+router<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/xxx'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 下面通过IO操作socket，具体socket操作请自行查看文档</span>
+    
+    <span class="token comment">// 以下是例子</span>
+    <span class="token constant">IO</span><span class="token punctuation">.</span>sockets<span class="token punctuation">.</span><span class="token function">in</span><span class="token punctuation">(</span>Id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'xxx'</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> 
+        <span class="token operator">...</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> router<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
 <p>咱把<code>router</code>导出，在<code>app.js</code>中导入，然后把<code>router.io</code>赋给<code>app.io</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> chatRouter = <span class="built_in">require</span>(<span class="string">&#x27;./routes/chat&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>();</span><br><span class="line">app.<span class="property">io</span> = chatRouter.<span class="property">io</span>; <span class="comment">// 现在app.io是一个函数，可以接收socket.io</span></span><br><span class="line">...</span><br><span class="line">app.<span class="title function_">use</span>(<span class="string">&#x27;/chat&#x27;</span>, chatRouter);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = app; </span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// app.js</span>
+
+<span class="token keyword">var</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> chatRouter <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./routes/chat'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span>io <span class="token operator">=</span> chatRouter<span class="token punctuation">.</span>io<span class="token punctuation">;</span> <span class="token comment">// 现在app.io是一个函数，可以接收socket.io</span>
+<span class="token operator">...</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">'/chat'</span><span class="token punctuation">,</span> chatRouter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> app<span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>最后，在<code>bin/www</code>中导入<code>socket.io</code>并调用<code>app.io</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bin/www</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = <span class="built_in">require</span>(<span class="string">&#x27;../app&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&#x27;http&#x27;</span>);</span><br><span class="line">...</span><br><span class="line"><span class="keyword">var</span> server = http.<span class="title function_">createServer</span>(app);</span><br><span class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">&#x27;socket.io&#x27;</span>)(server);</span><br><span class="line">app.<span class="title function_">io</span>(io);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// bin/www</span>
+
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'../app'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> http <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'http'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+<span class="token keyword">var</span> server <span class="token operator">=</span> http<span class="token punctuation">.</span><span class="token function">createServer</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'socket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span>server<span class="token punctuation">)</span><span class="token punctuation">;</span>
+app<span class="token punctuation">.</span><span class="token function">io</span><span class="token punctuation">(</span>io<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>现在<code>chat.js</code>中的<code>router.io</code>成功接收到导入的<code>socket</code>。</p>
 
